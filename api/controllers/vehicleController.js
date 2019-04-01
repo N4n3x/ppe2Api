@@ -2,14 +2,14 @@
 
 
 var mongoose = require('mongoose'),
-  Vehicle = mongoose.model('Vehicle');
+  Vehicle = mongoose.model('vehicle');
 
 exports.list_all_vehicles = function(req, res) {
-    Vehicle.find({}, function(err, vehicle) {
+  Vehicle.find({}, function(err, vehicle) {
     if (err)
       res.send(err);
     res.json(vehicle);
-  });
+  }).populate('category').select();
 };
 
 

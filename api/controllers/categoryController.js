@@ -2,7 +2,7 @@
 
 
 var mongoose = require('mongoose'),
-  Category = mongoose.model('Category');
+  Category = mongoose.model('category');
 
 exports.list_all_categories = function(req, res) {
     Category.find({}, function(err, category) {

@@ -33,4 +33,4 @@ userSchema.methods.comparePassword = function(password){
     return bcrypt.compareSync(password, this.hash_password);
 };
 
-mongoose.model('User', userSchema);
+mongoose.model('user', userSchema);

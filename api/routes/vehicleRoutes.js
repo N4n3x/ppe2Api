@@ -34,5 +34,5 @@ module.exports = function(app) {
   // usage Routes
   app.route('/usages')
     .get(usage.list_all_usages)
-
+    .post(usage.create_a_usage)
 };

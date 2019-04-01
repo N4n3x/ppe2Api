@@ -34,4 +34,4 @@ var UsageSchema = new Schema({
     }   
 });
 
-module.exports = mongoose.model('Usage', UsageSchema);
+module.exports = mongoose.model('usage', UsageSchema);

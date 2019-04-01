@@ -2,14 +2,14 @@
 
 
 var mongoose = require('mongoose'),
-  Usage = mongoose.model('Usage');
+  Usage = mongoose.model('usage');
 
 exports.list_all_usages = function(req, res) {
-    Usage.find({}, function(err, usage) {
+  Usage.find({}, function(err, usage) {
     if (err)
       res.send(err);
     res.json(usage);
-  });
+  }).populate('vehicle').populate('user').select();
 };
 
 

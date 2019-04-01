@@ -2,7 +2,7 @@
 
 
 var mongoose = require('mongoose'),
-  Role = mongoose.model('Role');
+  Role = mongoose.model('role');
 
 exports.list_all_roles = function(req, res) {
     Role.find({}, function(err, role) {

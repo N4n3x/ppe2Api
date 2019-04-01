@@ -10,4 +10,4 @@ var categorySchema = new Schema({
     }  
 });
 
-mongoose.model('Category', categorySchema);
+mongoose.model('category', categorySchema);
