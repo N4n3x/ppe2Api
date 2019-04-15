@@ -26,10 +26,12 @@ module.exports = function(app) {
   // category Routes
   app.route('/categories')
     .get(category.list_all_categories)
+    .post(category.create_a_category)
 
   // role Routes
   app.route('/roles')
     .get(role.list_all_roles)
+    .post(role.create_a_role)
 
   // usage Routes
   app.route('/usages')
