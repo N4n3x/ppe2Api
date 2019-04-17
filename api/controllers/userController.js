@@ -53,3 +53,11 @@ exports.roleRequired = function(req, res, next){
         return res.status(401).json({ message: 'Unauthorized user!' });
     }
 };
+
+exports.list_all_user = function(req, res) {
+    User.find({}, function(err, user) {
+      if (err)
+        res.send(err);
+      res.json(user);
+    }).populate('role').select();
+  };

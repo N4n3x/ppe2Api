@@ -23,6 +23,9 @@ module.exports = function(app) {
   app.route('/auth/sign_in')
     .post(userHandlers.sign_in);
 
+  app.route('/users')
+    .get(userHandlers.list_all_user)
+
   // category Routes
   app.route('/categories')
     .get(category.list_all_categories)
