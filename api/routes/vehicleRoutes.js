@@ -24,20 +24,24 @@ module.exports = function(app) {
     .post(userHandlers.sign_in);
 
   app.route('/users')
-    .get(userHandlers.list_all_user)
+    .get(userHandlers.list_all_user);
 
   // category Routes
   app.route('/categories')
     .get(category.list_all_categories)
-    .post(category.create_a_category)
+    .post(category.create_a_category);
 
   // role Routes
   app.route('/roles')
     .get(role.list_all_roles)
-    .post(role.create_a_role)
+    .post(role.create_a_role);
 
   // usage Routes
   app.route('/usages')
     .get(usage.list_all_usages)
-    .post(usage.create_a_usage)
+    .post(usage.create_a_usage);
+
+  app.route('/usages/available/:start/:end')
+    .get(usage.list_vehicle_available);
+
 };

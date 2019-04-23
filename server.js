@@ -2,6 +2,7 @@ var express = require('express'),
   app = express(),
   port = process.env.PORT || 8005,
   mongoose = require('mongoose'),
+  moment = require('moment'),
   Vehicle = require('./api/models/vehicleModel'), //created model loading here
   User = require('./api/models/userModel'),
   Usage = require('./api/models/usageModel'),

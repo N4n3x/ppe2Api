@@ -35,7 +35,7 @@ exports.read_a_vehicle = function(req, res) {
 
 
 exports.update_a_vehicle = function(req, res) {
-    Vehicle.findOneAndUpdate({_id: req.params.vehicleId}, req.body, {new: true}, function(err, vehicle) {
+  Vehicle.findOneAndUpdate({_id: req.params.vehicleId}, req.body, {new: true}, function(err, vehicle) {
     if (err)
       res.send(err);
     res.json(vehicle);
@@ -44,7 +44,7 @@ exports.update_a_vehicle = function(req, res) {
 
 
 exports.delete_a_vehicle = function(req, res) {
-    Vehicle.deleteOne({
+  Vehicle.deleteOne({
     _id: req.params.vehicleId
   }, function(err, vehicle) {
     if (err)

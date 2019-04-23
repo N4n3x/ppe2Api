@@ -1,8 +1,9 @@
 'use strict';
-
+var moment = require("moment");
 
 var mongoose = require('mongoose'),
-  Usage = mongoose.model('usage');
+  Usage = mongoose.model('usage'),
+  Vehicle = mongoose.model('vehicle');
 
 exports.list_all_usages = function(req, res) {
   Usage.find({}, function(err, usage) {
@@ -52,3 +53,36 @@ exports.delete_a_usage = function(req, res) {
     res.json({ message: 'usage successfully deleted' });
   });
 };
+
+exports.list_vehicle_available = function(req, res){
+    Vehicle.find({},function(err, vehicles){
+      if (err)
+        res.send(err);
+
+      Usage.find({$or:[
+        {start:{$gte:moment(req.params.start), $lte:moment(req.params.end)}},
+        {end:{$gte:moment(req.params.start), $lte:moment(req.params.end)}},
+        {start:{$lte:moment(req.params.start)},end:{$gte:moment(req.params.end)}}
+      ]},function(err, usages){
+        if (err)
+          res.send(err);
+        
+        usages.forEach((e)=>{
+          
+          // console.log(vehicles.findIndex(ele => ele._id === e.vehicle._id))
+          let index = vehicles.map(function(el){return el.registration;}).indexOf(e.vehicle.registration);
+          if(index >= 0){
+            vehicles.splice( index,1);
+          }
+        });
+        res.json(vehicles);
+      }).select("vehicle").populate('vehicle').select();
+    });
+    
+    
+}
+
+// {$or:[
+//   {start:{$gte:moment(req.params.end).toDate()}},
+//   {end:{$lte:moment(req.params.start).toDate()}}
+// ]}

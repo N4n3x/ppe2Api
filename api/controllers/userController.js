@@ -60,4 +60,4 @@ exports.list_all_user = function(req, res) {
         res.send(err);
       res.json(user);
     }).populate('role').select();
-  };
+};

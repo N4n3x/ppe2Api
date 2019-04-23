@@ -5,11 +5,13 @@ var mongoose = require('mongoose'),
 var UsageSchema = new Schema({
     start: {
         type: Date,
-        require: true
+        require: true,
+        min: Date.now
     },
     end: {
         type: Date,
-        require: true
+        require: true,
+        min: Date.now
     },
     disable: {
         type: Boolean,
