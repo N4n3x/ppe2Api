@@ -32,8 +32,7 @@ exports.sign_in = function(req, res){
             res.status(401).json({ message: 'Authentication failed. Wrong password.' });
           } else {
             return res.json({
-                token: jwt.sign({ email: user.email, fullName: user.name, _id: user._id, role: user.role}, 'RESTFULAPIs'),
-                _id: user._id
+                token: jwt.sign({ email: user.email, fullName: user.name, _id: user._id, role: user.role}, 'RESTFULAPIs')
             });
           }
         }
@@ -63,4 +62,12 @@ exports.list_all_user = function(req, res) {
         res.send(err);
       res.json(user);
     }).populate('role').select();
+};
+
+exports.user_by_email = function(req, res) {
+    User.findOne({email:req.params.email}, function(err, user) {
+    if (err)
+      res.send(err);
+    res.json(user);
+  });
 };
