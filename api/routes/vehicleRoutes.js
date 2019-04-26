@@ -26,6 +26,9 @@ module.exports = function(app) {
   app.route('/users')
     .get(userHandlers.list_all_user);
 
+  app.route('/users/:email')
+    .get(userHandlers.user_by_email);
+
   // category Routes
   app.route('/categories')
     .get(category.list_all_categories)
