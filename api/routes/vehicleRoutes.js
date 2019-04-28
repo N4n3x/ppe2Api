@@ -43,6 +43,9 @@ module.exports = function(app) {
   app.route('/usages')
     .get(usage.list_all_usages)
     .post(usage.create_a_usage)
+    
+
+  app.route('/usages/:usageId')
     .put(usage.update_a_usage);
 
   app.route('/usages/now')
