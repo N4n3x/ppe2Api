@@ -54,6 +54,16 @@ exports.delete_a_usage = function(req, res) {
   });
 };
 
+exports.list_usages_futur = function(req, res) {
+  Usage.find({
+    start:{$gte:moment()}
+  }, function(err, usage) {
+    if (err)
+      res.send(err);
+    res.json(usage);
+  }).populate('vehicle').populate('user').select();
+};
+
 exports.list_vehicle_available = function(req, res){
     Vehicle.find({},function(err, vehicles){
       if (err)

@@ -42,7 +42,11 @@ module.exports = function(app) {
   // usage Routes
   app.route('/usages')
     .get(usage.list_all_usages)
-    .post(usage.create_a_usage);
+    .post(usage.create_a_usage)
+    .put(usage.update_a_usage);
+
+  app.route('/usages/now')
+    .get(usage.list_usages_futur);
 
   app.route('/usages/available/:start/:end')
     .get(usage.list_vehicle_available);
