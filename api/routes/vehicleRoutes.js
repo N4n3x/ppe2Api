@@ -46,7 +46,8 @@ module.exports = function(app) {
     
 
   app.route('/usages/:usageId')
-    .put(usage.update_a_usage);
+    .put(usage.update_a_usage)
+    .delete(usage.delete_a_usage);
 
   app.route('/usages/now')
     .get(usage.list_usages_futur);
