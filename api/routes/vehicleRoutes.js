@@ -13,8 +13,8 @@ module.exports = function(app) {
 
   app.route('/vehicles/:vehicleId')
     .get(vehicle.read_a_vehicle)
-    .put(vehicle.update_a_vehicle)
-    .delete(vehicle.delete_a_vehicle);
+    .put(userHandlers.loginRequired, vehicle.update_a_vehicle)
+    .delete(userHandlers.loginRequired, vehicle.delete_a_vehicle);
 
   // user Routes
   app.route('/auth/register')
@@ -29,15 +29,18 @@ module.exports = function(app) {
   app.route('/users/:email')
     .get(userHandlers.user_by_email);
 
+  app.route('/users/:userId')  
+    .put(userHandlers.loginRequired, userHandlers.update_a_user);
+
   // category Routes
   app.route('/categories')
     .get(category.list_all_categories)
-    .post(category.create_a_category);
+    .post(userHandlers.loginRequired, category.create_a_category);
 
   // role Routes
   app.route('/roles')
     .get(role.list_all_roles)
-    .post(role.create_a_role);
+    .post(userHandlers.loginRequired, role.create_a_role);
 
   // usage Routes
   app.route('/usages')

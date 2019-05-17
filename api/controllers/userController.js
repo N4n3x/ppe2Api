@@ -71,3 +71,11 @@ exports.user_by_email = function(req, res) {
     res.json(user);
   });
 };
+
+exports.update_a_user = function(req, res) {
+    User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
+    if (err)
+      res.send(err);
+    res.json(user);
+  });
+};
