@@ -30,7 +30,8 @@ module.exports = function(app) {
     .get(userHandlers.user_by_email);
 
   app.route('/users/:userId')  
-    .put(userHandlers.loginRequired, userHandlers.update_a_user);
+    .put(userHandlers.loginRequired, userHandlers.update_a_user)
+    .delete(userHandlers.loginRequired, userHandlers.delete_a_user);
 
   // category Routes
   app.route('/categories')
