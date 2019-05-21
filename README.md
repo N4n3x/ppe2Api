@@ -1,4 +1,4 @@
-# API - POMMADAM - PPE2
+# API RESTfull - POMMADAM - PPE2
 * Prérequis
 * Installation
 * Utilisation
