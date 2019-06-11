@@ -32,11 +32,11 @@ exports.sign_in = function(req, res){
             res.status(401).json({ message: 'Authentication failed. Wrong password.' });
           } else {
             return res.json({
-                token: jwt.sign({ email: user.email, fullName: user.name, _id: user._id, role: user.role}, 'RESTFULAPIs')
+                token: jwt.sign({ email: user.email, fullName: user.name, _id: user._id, role: user.role.name}, 'RESTFULAPIs')
             });
           }
         }
-    });
+    }).populate('role');
 };
 
 exports.loginRequired = function(req, res, next){
@@ -57,7 +57,7 @@ exports.roleRequired = function(req, res, next){
 };
 
 exports.adminRequired = function(req, res, next){
-  if (req.user && req.user.role.name === "administrateur") {
+  if (req.user && req.user.role === "administrateur") {
       next();
   } else {
       return res.status(401).json({ message: 'Unauthorized user!' });

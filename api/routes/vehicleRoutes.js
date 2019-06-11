@@ -9,16 +9,16 @@ module.exports = function(app) {
   // vehicle Routes
   app.route('/vehicles')
     .get(vehicle.list_all_vehicles)
-    .post(userHandlers.loginRequired, vehicle.create_a_vehicle);
+    .post(userHandlers.adminRequired, vehicle.create_a_vehicle);
 
   app.route('/vehicles/:vehicleId')
     .get(vehicle.read_a_vehicle)
-    .put(userHandlers.loginRequired, vehicle.update_a_vehicle)
-    .delete(userHandlers.loginRequired, vehicle.delete_a_vehicle);
+    .put(userHandlers.adminRequired, vehicle.update_a_vehicle)
+    .delete(userHandlers.adminRequired, vehicle.delete_a_vehicle);
 
   // user Routes
   app.route('/auth/register')
-    .post(userHandlers.loginRequired, userHandlers.register);
+    .post(userHandlers.adminRequired, userHandlers.register);
 
   app.route('/auth/sign_in')
     .post(userHandlers.sign_in);
@@ -41,17 +41,17 @@ module.exports = function(app) {
   // role Routes
   app.route('/roles')
     .get(role.list_all_roles)
-    .post(userHandlers.loginRequired, role.create_a_role);
+    .post(userHandlers.adminRequired, role.create_a_role);
 
   // usage Routes
   app.route('/usages')
     .get(usage.list_all_usages)
-    .post(usage.create_a_usage)
+    .post(userHandlers.loginRequired, usage.create_a_usage)
     
 
   app.route('/usages/:usageId')
-    .put(usage.update_a_usage)
-    .delete(usage.delete_a_usage);
+    .put(usage.adOrMeRequired, usage.update_a_usage)
+    .delete(usage.adOrMeRequired, usage.delete_a_usage);
 
   app.route('/usages/now')
     .get(usage.list_usages_futur);

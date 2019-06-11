@@ -3,6 +3,7 @@ var moment = require("moment");
 
 var mongoose = require('mongoose'),
   Usage = mongoose.model('usage'),
+  User = mongoose.model('user'),
   Vehicle = mongoose.model('vehicle');
 
 exports.list_all_usages = function(req, res) {
@@ -87,10 +88,21 @@ exports.list_vehicle_available = function(req, res){
         });
         res.json(vehicles);
       }).select("vehicle").populate('vehicle').select();
-    });
-    
-    
+    }); 
 }
+
+exports.adOrMeRequired = function(req, res, next){
+  Usage.findById(req.params.usageId, function(err, usage) {
+    if (err)
+      res.send(err);
+    if (req.user && (req.user.role === "administrateur" || req.user._id == usage.user._id)) {
+        next();
+    } else {
+        return res.status(401).json({ message: 'Unauthorized user!' });
+    }
+  })
+  
+};
 
 // {$or:[
 //   {start:{$gte:moment(req.params.end).toDate()}},
