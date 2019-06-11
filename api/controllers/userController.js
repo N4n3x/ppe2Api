@@ -41,7 +41,7 @@ exports.sign_in = function(req, res){
 
 exports.loginRequired = function(req, res, next){
     if (req.user) {
-        console.log(req.user);
+        //console.log(req.user);
         next();
     } else {
         return res.status(401).json({ message: 'Unauthorized user!' });
@@ -54,6 +54,14 @@ exports.roleRequired = function(req, res, next){
     } else {
         return res.status(401).json({ message: 'Unauthorized user!' });
     }
+};
+
+exports.adminRequired = function(req, res, next){
+  if (req.user && req.user.role === "administrateur") {
+      next();
+  } else {
+      return res.status(401).json({ message: 'Unauthorized user!' });
+  }
 };
 
 exports.list_all_user = function(req, res) {

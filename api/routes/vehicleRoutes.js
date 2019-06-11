@@ -36,7 +36,7 @@ module.exports = function(app) {
   // category Routes
   app.route('/categories')
     .get(category.list_all_categories)
-    .post(userHandlers.loginRequired, category.create_a_category);
+    .post(userHandlers.adminRequired, category.create_a_category);
 
   // role Routes
   app.route('/roles')
