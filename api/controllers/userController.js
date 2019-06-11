@@ -57,7 +57,7 @@ exports.roleRequired = function(req, res, next){
 };
 
 exports.adminRequired = function(req, res, next){
-  if (req.user && req.user.role === "administrateur") {
+  if (req.user && req.user.role.name === "administrateur") {
       next();
   } else {
       return res.status(401).json({ message: 'Unauthorized user!' });
